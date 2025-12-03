@@ -1,20 +1,16 @@
-# Linux期末大作业
+# Linux 期末大作业
 
 作者：计算机科学与技术 三班 朱林立
 
-[GitHub主页](https://github.com/Megalomanian)
+[GitHub 主页](https://github.com/Megalomanian)，给个 star 呗
 
-虚拟机账号：student
+虚拟机文件`LinuxHOMEWORK111.ova`以 ova 格式导出，如需导入 virtual box 或 vm ware 中检查，可[参考此文章](https://blog.csdn.net/weixin_43031313/article/details/129897809)
 
-虚拟机密码：student
+## 题目 1：在 virtual box 中安装 archlinux
 
-虚拟机文件`LinuxHOMEWORK111.ova`以ova格式导出，如需导入virtual box或vm ware中检查，可[参考此文章](https://blog.csdn.net/weixin_43031313/article/details/129897809)
+从[此链接](https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/archlinux-2025.11.01-x86_64.iso)下载 archlinux 的 iso 并导入
 
-## 题目1：在virtual box中安装archlinux
-
-下载archlinux的iso并导入
-
-系统配置CPU、内存、显存、硬盘
+系统配置 CPU、内存、显存、硬盘如下
 
 ![image.png](image.png)
 
@@ -22,9 +18,9 @@
 
 ![image.png](image%202.png)
 
-ping检查网络，同步时间
+ping 检查网络，同步时间
 
-```plaintext
+```bash
 ping www.baidu.com -c 3
 timedatectl set-ntp true
 ```
@@ -39,15 +35,17 @@ cfdisk /dev/sda
 
 配置镜像源
 
+注：本文所有文本编辑内容使用 vim 编辑器，vim 编辑器入门可参考以下视频：[视频链接](https://www.bilibili.com/video/BV13t4y1t7Wg)
+
 ```plaintext
 vim /etc/pacman.d/mirrorlist
 ```
 
-dd剪切清华源，p黏贴到第一行
+dd 剪切清华源，p 黏贴到第一行
 
 ![image.png](image%204.png)
 
-安装基础系统里要用的东西（如果配置了镜像源就可以加速下载环节）
+安装基础系统里要用的东西（如果配置了镜像源就可以极大加速下载环节）
 
 ```plaintext
 pacstrap /mnt base linux linux-firmware vim networkmanager sudo zsh
@@ -55,7 +53,7 @@ pacstrap /mnt base linux linux-firmware vim networkmanager sudo zsh
 
 ![image.png](image%205.png)
 
-生成fstab，进系统
+生成 fstab，进系统
 
 ```plaintext
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -65,17 +63,21 @@ arch-chroot /mnt
 
 ![image.png](image%206.png)
 
-## 题目2：设置hostname为学号
+## 题目 2：设置 hostname 为学号
 
 ```plaintext
 echo 12024242193 > /etc/hostname
 ```
 
-vim改hosts
+vim 编辑 hosts 文件
 
 ```plaintext
 vim /etc/hosts
+```
 
+写入以下内容
+
+```
 127.0.0.1   localhost
 ::1         localhost
 127.0.1.1   12024242193.localdomain 12024242193
@@ -83,29 +85,29 @@ vim /etc/hosts
 
 [https://www.notion.so](https://www.notion.so)
 
-## 题目3：设置时区
+## 题目 3：设置时区
 
 ```plaintext
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc       # 生成 /etc/adjtime
 ```
 
-## 题目4：创建普通用户 + wheel 组 + sudo
+## 题目 4：创建普通用户 + wheel 组 + sudo
 
-设置root密码：
+设置 root 密码：
 
 ```plaintext
 passwd
 ```
 
-创建普通student用户，设置密码：
+创建普通 student 用户，设置密码：
 
 ```plaintext
 useradd -m -G wheel -s /bin/bash student
 passwd student
 ```
 
-允许wheel用户组使用sudo：
+允许 wheel 用户组使用 sudo：
 
 ```plaintext
 EDITOR=vim visudo
@@ -113,9 +115,9 @@ EDITOR=vim visudo
 
 ![image.png](image%207.png)
 
-## 题目5：把普通用户的shell切换到zsh
+## 题目 5：把普通用户的 shell 切换到 zsh
 
-1. 修改用户 shell（之前装过zsh了）：
+1. 修改用户 shell（之前装过 zsh 了）：
 
 ```bash
 chsh -s /bin/zsh student
@@ -123,7 +125,7 @@ chsh -s /bin/zsh student
 
 ![image.png](image%208.png)
 
-## 题目1（后半部分）：此时安装引导（GRUB，BIOS + MBR）
+## 题目 1（后半部分）：此时安装引导（GRUB，BIOS + MBR）
 
 ```bash
 pacman -S grub
@@ -141,7 +143,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S xorg-server xorg-apps xorg-xinit
 ```
 
-### 2. 安装XFCE（这个桌面环境我用着比较习惯）
+### 2. 安装 XFCE（这个桌面环境我用着比较习惯）
 
 ```bash
 pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
@@ -157,7 +159,7 @@ systemctl enable lightdm
 
 ![image.png](image%2010.png)
 
-## 题目7：安装浏览器（谷歌或者火狐，我这块都装了）
+## 题目 7：安装浏览器（谷歌或者火狐，我这块都装了）
 
 ```bash
 pacman -S firefox # 装火狐
@@ -168,7 +170,7 @@ pacman -S chromium # 装谷歌
 
 ![image.png](image%2012.png)
 
-## 题目8：设置中文字体
+## 题目 8：设置中文字体
 
 改/etc/locale.gen，取消这两行的注释：
 
@@ -194,11 +196,11 @@ pacman -S noto-fonts-cjk wqy-microhei
 
 ![image.png](image%2016.png)
 
-reboot重启：
+reboot 重启：
 
 ![image.png](image%2017.png)
 
-## 题目9：安装输入法，开机自启
+## 题目 9：安装输入法，开机自启
 
 ```plaintext
 pacman -S fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt
@@ -212,7 +214,7 @@ pacman -S fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt
 
 ![image.png](image%2019.png)
 
-## 题目10：安装nginx设置端口8080开机自启
+## 题目 10：安装 nginx 设置端口 8080 开机自启
 
 安装
 
@@ -251,11 +253,17 @@ vim /etc/ssh/sshd_config
 systemctl enable --now sshd
 ```
 
-测试：
+运行以下命令，从本地连接测试：
+
+```plaintext
+ssh student@127.0.0.1 -p 2222
+```
+
+出现以下内容代表成功
 
 ![image.png](image%2023.png)
 
-## 题目12：system_info 脚本
+## 题目 12：system_info 脚本
 
 将以下内容写入/usr/local/bin/system_info
 
