@@ -20,7 +20,7 @@
 
 ping 检查网络，同步时间
 
-```bash
+```plaintext
 ping www.baidu.com -c 3
 timedatectl set-ntp true
 ```
@@ -119,7 +119,7 @@ EDITOR=vim visudo
 
 1. 修改用户 shell（之前装过 zsh 了）：
 
-```bash
+```plaintext
 chsh -s /bin/zsh student
 ```
 
@@ -127,7 +127,7 @@ chsh -s /bin/zsh student
 
 ## 题目 1（后半部分）：此时安装引导（GRUB，BIOS + MBR）
 
-```bash
+```plaintext
 pacman -S grub
 grub-install --target=i386-pc /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -139,19 +139,19 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ### 1. 安装 X 相关
 
-```bash
+```plaintext
 pacman -S xorg-server xorg-apps xorg-xinit
 ```
 
 ### 2. 安装 XFCE（这个桌面环境我用着比较习惯）
 
-```bash
+```plaintext
 pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
 ```
 
 ### 3. 开机自启图形登录管理器（以 lightdm 为例）
 
-```bash
+```plaintext
 systemctl enable lightdm
 ```
 
@@ -161,7 +161,7 @@ systemctl enable lightdm
 
 ## 题目 7：安装浏览器（谷歌或者火狐，我这块都装了）
 
-```bash
+```plaintext
 pacman -S firefox # 装火狐
 pacman -S chromium # 装谷歌
 ```
