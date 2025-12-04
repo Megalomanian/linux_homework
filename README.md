@@ -137,25 +137,29 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ## 题目 6：安装图形界面 + 开机启动（5 分）
 
-### 1. 安装 X 相关
+安装 X 相关
 
 ```plaintext
 pacman -S xorg-server xorg-apps xorg-xinit
 ```
 
-### 2. 安装 XFCE（这个桌面环境我用着比较习惯）
+安装 XFCE（这个桌面环境我用着比较习惯）
 
 ```plaintext
 pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
 ```
 
-### 3. 开机自启图形登录管理器（以 lightdm 为例）
+开机自启图形登录管理器（以 lightdm 为例）
 
 ```plaintext
 systemctl enable lightdm
 ```
 
 重启一下进入图形化界面
+
+```plaintext
+reboot
+```
 
 ![image.png](image%2010.png)
 
@@ -222,7 +226,7 @@ pacman -S fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt
 pacman -S nginx
 ```
 
-改配置文件/etc/nginx/nginx.conf
+改配置文件/etc/nginx/nginx.conf，仅将其中的 listen 80 改为 listen 8080 即可
 
 ![image.png](image%2020.png)
 
@@ -269,6 +273,7 @@ ssh student@127.0.0.1 -p 2222
 
 ```plaintext
 #!/usr/bin/env bash
+export LC_ALL=C
 
 USER_NAME=$(whoami)
 
